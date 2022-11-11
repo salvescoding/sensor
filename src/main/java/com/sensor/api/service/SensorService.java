@@ -1,5 +1,6 @@
 package com.sensor.api.service;
 
+import com.sensor.api.controller.SensorDTO;
 import com.sensor.api.domain.Sensor;
 import org.springframework.stereotype.Service;
 
