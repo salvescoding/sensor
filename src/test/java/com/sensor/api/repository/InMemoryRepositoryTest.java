@@ -27,4 +27,34 @@ class InMemoryRepositoryTest {
         Set<Sensor> result = inMemoryRepository.getSensorsByIds(List.of(1, 2));
         assertThat(result, is(Set.of(sensorOne)));
     }
+
+    @Test
+    void shouldGetSensorsByIdsCorrectly() {
+        Sensor sensorOne = new Sensor(1, 34.3, 90.2, 12.1, LocalDateTime.of(2022, 10, 3, 12, 21, 0));
+        Sensor sensorFour = new Sensor(4, 37.3, 0.2, 32.1, LocalDateTime.now());
+        List<Sensor> sensors = List.of(
+                sensorOne,
+                sensorFour
+        );
+
+        inMemoryRepository.save(sensors);
+        Set<Sensor> result = inMemoryRepository.getSensorsByIds(List.of(1, 2, 4));
+        assertThat(result, is(Set.of(sensorOne, sensorFour)));
+    }
+
+    @Test
+    void shouldGetAllSensorsValues() {
+        Sensor sensorOne = new Sensor(1, 34.3, 90.2, 12.1, LocalDateTime.of(2022, 10, 3, 12, 21, 0));
+        Sensor sensorFour = new Sensor(4, 37.3, 20.2, 32.1, LocalDateTime.now());
+        Sensor sensorTen = new Sensor(10, 32.3, 50.2, 52.1, LocalDateTime.now());
+        List<Sensor> sensors = List.of(
+                sensorOne,
+                sensorFour,
+                sensorTen
+        );
+        inMemoryRepository.save(sensors);
+
+        Set<Sensor> result = inMemoryRepository.getAllSensors();
+        assertThat(result, is(Set.of(sensorOne, sensorFour, sensorTen)));
+    }
 }

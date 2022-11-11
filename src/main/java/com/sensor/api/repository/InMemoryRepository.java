@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 @Repository
 public class InMemoryRepository {
 
-    private final ConcurrentHashMap<Integer, List<Sensor>> repository;
+    private final ConcurrentHashMap<Integer, Set<Sensor>> repository;
 
     public InMemoryRepository() {
         this.repository =  new ConcurrentHashMap<>(10000);
@@ -20,8 +20,8 @@ public class InMemoryRepository {
 
     public void save(List<Sensor> sensors) {
         sensors.forEach(sensor -> {
-            List<Sensor> values = repository.get(sensor.id());
-            if (values == null) repository.put(sensor.id(), List.of(sensor));
+            Set<Sensor> values = repository.get(sensor.id());
+            if (values == null) repository.put(sensor.id(), Set.of(sensor));
             else {
                 values.add(sensor);
                 repository.put(sensor.id(), values);
@@ -33,7 +33,11 @@ public class InMemoryRepository {
         return ids.stream()
                 .map(repository::get)
                 .filter(Objects::nonNull)
-                .flatMap(List::stream)
+                .flatMap(Set::stream)
                 .collect(Collectors.toSet());
+    }
+
+    public Set<Sensor> getAllSensors() {
+        return repository.values().stream().flatMap(Set::stream).collect(Collectors.toSet());
     }
 }
