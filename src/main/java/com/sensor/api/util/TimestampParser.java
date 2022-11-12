@@ -11,7 +11,7 @@ public class TimestampParser {
         private final static DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
         public static LocalDateTime parseDateTime(String dateTime) {
-            if (dateTime == null || dateTime.isEmpty()) throw new MissingTimestampException("Timestamp is null or empty");;
+            if (dateTime == null || dateTime.isEmpty()) return null;
             return LocalDateTime.parse(dateTime.replace("T", " "), FORMATTER);
         }
 

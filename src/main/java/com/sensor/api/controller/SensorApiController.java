@@ -75,8 +75,14 @@ public class SensorApiController {
                     sensorDTO.temperature(),
                     sensorDTO.humidity(),
                     sensorDTO.windSpeed(),
-                    parseDateTime(sensorDTO.timestamp()));
+                    parseTimestamp(sensorDTO.timestamp()));
         }).toList();
+    }
+
+    private static LocalDateTime parseTimestamp(String timestamp) {
+        if (timestamp == null || timestamp.isEmpty()) throw new MissingTimestampException("Missing timestamp for creation");
+        else return parseDateTime(timestamp);
+
     }
 
 }
