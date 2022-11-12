@@ -28,8 +28,8 @@ public class SensorService {
         return filterSensorEventsWithinTimeRange(inMemoryRepository.getAllSensors(), start, end);
     }
 
-    public Map<Integer, List<Sensor>> fetchSensorsByIds(List<Integer> ids, Optional<LocalDateTime> start, Optional<LocalDateTime> end) {
-        return filterSensorEventsWithinTimeRange(inMemoryRepository.getSensorsByIds(ids), start, end);
+    public Map<Integer, List<Sensor>> fetchSensorsById(Integer id, Optional<LocalDateTime> start, Optional<LocalDateTime> end) {
+        return filterSensorEventsWithinTimeRange(inMemoryRepository.getSensorsById(id), start, end);
     }
 
     private Map<Integer, List<Sensor>> filterSensorEventsWithinTimeRange(Set<Sensor> sensors, Optional<LocalDateTime> start, Optional<LocalDateTime> end) {

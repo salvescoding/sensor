@@ -19,9 +19,9 @@ public class FetchSensorsWithMetricsUseCase {
     }
 
 
-    public List<SensorResponse> fetchSensorsEventsWithinTimeRangeAndMapMetricsWithIds(
-            List<Integer> ids, Optional<LocalDateTime> startsAt, Optional<LocalDateTime> endsAt) {
-        Map<Integer, List<Sensor>> sensors = sensorService.fetchSensorsByIds(ids, startsAt, endsAt);
+    public List<SensorResponse> fetchSensorsEventsWithinTimeRangeAndMapMetricsWithId(
+            Integer id, Optional<LocalDateTime> startsAt, Optional<LocalDateTime> endsAt) {
+        Map<Integer, List<Sensor>> sensors = sensorService.fetchSensorsById(id, startsAt, endsAt);
         return mapSensorToResponseWithAllMetrics(sensors);
     }
 

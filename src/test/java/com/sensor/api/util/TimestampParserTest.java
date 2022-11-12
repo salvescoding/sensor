@@ -15,9 +15,9 @@ class TimestampParserTest {
 
     @Test
     void shouldParseDateCorrectly() {
-        LocalDateTime localDateTime = TimestampParser.parseDateTime("2003-06-30T20:00:00");
+        LocalDateTime localDateTime = TimestampParser.parseDateTime("2022-11-03T20:00:00");
 
-        assertThat(localDateTime, is(LocalDateTime.of(2003, 6, 30, 20, 0, 0)));
+        assertThat(localDateTime, is(LocalDateTime.of(2022, 11, 3, 20, 0, 0)));
     }
 
 

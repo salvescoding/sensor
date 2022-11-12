@@ -2,5 +2,5 @@ package com.sensor.api.controller;
 
 import java.util.List;
 
-public record SensorsDTO(List<SensorDTO> sensorList) { }
+public record SensorsRequestDTO(List<SensorDTO> sensors) { }
 

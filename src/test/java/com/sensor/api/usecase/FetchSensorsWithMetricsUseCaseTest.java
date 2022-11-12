@@ -37,26 +37,35 @@ class FetchSensorsWithMetricsUseCaseTest {
     void shouldReturnSensorDataWithAvgMinAndMaxMetricsCalculated() {
         Sensor sensorOne = new Sensor(1, 34.3, 90.2, 12.1, LocalDateTime.of(2022, 11, 5, 0, 0, 0));
         Sensor sensorOneTwo = new Sensor(1, 36.3, 80.2, 32.1, LocalDateTime.of(2022, 11, 6, 0, 0, 0));
-        Sensor sensorThree = new Sensor(3, 19.3, 50.2, 1.1, LocalDateTime.of(2022, 11, 2, 0, 0, 0));
-        Sensor sensorTwo = new Sensor(2, 23.3, 60.2, 2.1, LocalDateTime.of(2022, 9, 2, 0, 0, 0));
         Sensor sensorFour = new Sensor(4, 27.3, 20.2, 12.1, LocalDateTime.of(2022, 10, 1, 0, 0, 0));
         Sensor sensorFourTwo = new Sensor(4, 35.3, 34.4, 32.3, LocalDateTime.of(2022, 10, 6, 0, 0, 0));
 
-        Mockito.when(inMemoryRepository.getSensorsByIds(List.of(1,2,3,4)))
-                .thenReturn(Set.of(sensorOne, sensorFour, sensorThree, sensorOneTwo, sensorTwo, sensorFourTwo));
+        Mockito.when(inMemoryRepository.getSensorsById(1))
+                .thenReturn(Set.of(sensorOne,  sensorOneTwo));
 
-        List<SensorResponse> result = fetchSensorsWithMetrics.fetchSensorsEventsWithinTimeRangeAndMapMetricsWithIds(
-                List.of(1, 2, 3, 4),
+        Mockito.when(inMemoryRepository.getSensorsById(4))
+                .thenReturn(Set.of(sensorFour,  sensorFourTwo));
+
+        List<SensorResponse> resultSensorOne = fetchSensorsWithMetrics.fetchSensorsEventsWithinTimeRangeAndMapMetricsWithId(
+                1,
                 Optional.of(LocalDateTime.of(2022, 10, 1, 0, 0, 0)),
                 Optional.of(LocalDateTime.of(2022, 12, 1, 0, 0, 0)));
 
-        List<SensorResponse> expected = List.of(
-                new SensorResponse(1, 35.3, 85.2, 22.1, 36.3, 34.3, 90.2, 80.2, 32.1 , 12.1),
-                new SensorResponse(3, 19.3, 50.2, 1.1, 19.3, 19.3, 50.2, 50.2, 1.1 , 1.1),
+        List<SensorResponse> resultSensorFour = fetchSensorsWithMetrics.fetchSensorsEventsWithinTimeRangeAndMapMetricsWithId(
+                4,
+                Optional.of(LocalDateTime.of(2022, 10, 1, 0, 0, 0)),
+                Optional.of(LocalDateTime.of(2022, 12, 1, 0, 0, 0)));
+
+        List<SensorResponse> expectedOne = List.of(
+                new SensorResponse(1, 35.3, 85.2, 22.1, 36.3, 34.3, 90.2, 80.2, 32.1 , 12.1)
+        );
+
+        List<SensorResponse> expectedFour = List.of(
                 new SensorResponse(4, 31.3, 27.3, 22.2, 35.3, 27.3, 34.4, 20.2, 32.3 , 12.1)
         );
 
-        assertThat(result, is(expected));
+        assertThat(resultSensorOne, is(expectedOne));
+        assertThat(resultSensorFour, is(expectedFour));
     }
 
     @Test

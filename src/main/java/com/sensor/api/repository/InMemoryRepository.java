@@ -31,11 +31,12 @@ public class InMemoryRepository {
         });
     }
 
-    public Set<Sensor> getSensorsByIds(List<Integer> ids) {
-        return ids.stream()
-                .map(repository::get)
+    public Set<Sensor> getSensorsById(Integer id) {
+        ArrayList<Sensor> sensors = repository.get(id);
+        if (sensors == null) return Collections.emptySet();
+        else return sensors
+                .stream()
                 .filter(Objects::nonNull)
-                .flatMap(ArrayList::stream)
                 .collect(Collectors.toSet());
     }
 
