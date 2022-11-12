@@ -12,15 +12,15 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @ResponseBody
 public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler(TimestampParsingException.class)
-    public ResponseEntity<ErrorMessage> handleXMLMappingException(TimestampParsingException ex, WebRequest request) {
+    @ExceptionHandler(MissingTimestampException.class)
+    public ResponseEntity<ErrorMessage> handleXMLMappingException(MissingTimestampException ex, WebRequest request) {
         ErrorMessage message = new ErrorMessage(
                 HttpStatus.NOT_FOUND.value(),
                 ex.getMessage());
 
         return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
     }
-    
+
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorMessage> globalExceptionHandler(Exception ex, WebRequest request) {

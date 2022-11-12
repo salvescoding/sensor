@@ -1,5 +1,6 @@
 package com.sensor.api.util;
 
+import com.sensor.api.controller.MissingTimestampException;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
@@ -18,6 +19,11 @@ class TimestampParserTest {
         LocalDateTime localDateTime = TimestampParser.parseDateTime("2022-11-03T20:00:00");
 
         assertThat(localDateTime, is(LocalDateTime.of(2022, 11, 3, 20, 0, 0)));
+    }
+
+    @Test
+    void shouldThrowMissingTimestampExceptionWhenNoTimestampIsProvided() {
+        assertThrows(MissingTimestampException.class, () -> TimestampParser.parseDateTime(null));
     }
 
 
