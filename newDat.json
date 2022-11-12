@@ -1,0 +1,53 @@
+{
+  "sensors": [
+    {
+      "id": "1",
+      "temperature": 12.3,
+      "humidity": 78.9,
+      "windSpeed": 13.2,
+      "timestamp": "2022-11-03T20:00:00"
+    },
+    {
+      "id": "2",
+      "temperature": 22.3,
+      "humidity": 90.9,
+      "windSpeed": 10.2,
+      "timestamp": "2022-11-10T20:00:00"
+    },
+    {
+      "id": "1",
+      "temperature": 15.3,
+      "humidity": 70.9,
+      "windSpeed": 13.2,
+      "timestamp": "2022-11-13T20:00:00"
+    },
+    {
+      "id": "2",
+      "temperature": 32.3,
+      "humidity": 84.9,
+      "windSpeed": 18.2,
+      "timestamp": "2022-11-02T20:00:00"
+    },
+    {
+      "id": "3",
+      "temperature": 22.6,
+      "humidity": 35.9,
+      "windSpeed": 1.2,
+      "timestamp": "2022-11-08T20:00:00"
+    },
+    {
+      "id": "1",
+      "temperature": 18.4,
+      "humidity": 67.2,
+      "windSpeed": 12.2,
+      "timestamp": "2022-11-08T20:00:00"
+    },
+    {
+      "id": "2",
+      "temperature": 16.3,
+      "humidity": 58.9,
+      "windSpeed": 23.3,
+      "timestamp": "2022-11-05T20:00:00"
+    }
+  ]
+}
